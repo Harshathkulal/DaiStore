@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import cart from "../assets/Cart.svg"
+
 
 
 const Header = () => {
@@ -26,17 +26,17 @@ const Header = () => {
         {/* Desktop Menu - Hidden on Mobile */}
         <ul className="hidden ml-auto lg:flex lg:gap-x-6 text-sm font-semibold leading-6 text-gray-900">
           <li>
-            <a href="#" className="hover:underline me-4 md:me-6">
+            <a href="/" className="hover:underline me-4 md:me-6">
               Home
             </a>
           </li>
           <li>
-            <a href="#" className="hover:underline me-4 md:me-6">
+            <a href="/product" className="hover:underline me-4 md:me-6">
               Product
             </a>
           </li>
           <li>
-            <a href="#" className="hover:underline me-4 md:me-6">
+            <a href="/login" className="hover:underline me-4 md:me-6">
               Login
             </a>
           </li>
@@ -65,7 +65,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {nav && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black/80 z-20">
+        <div className="fixed top-0 left-0 w-full h-full bg-black/80 z-20 lg:hidden">
           <div className="fixed top-0 left-0 w-[70%] h-full bg-white z-30 shadow-lg">
             <div className="flex justify-between items-center p-4">
               <h2 className="text-2xl">
