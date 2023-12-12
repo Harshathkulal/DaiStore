@@ -5,6 +5,7 @@ import Login from "./components/Registration/Login";
 import Main from "./components/Home/Product";
 import Signup from "./components/Registration/Signup";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
           <Route path="/" element={<Main />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/cart" element={<Cart/>}></Route>
         </Routes>
-        <Footer />
+        <Footer/>
       </BrowserRouter>
     </>
   );

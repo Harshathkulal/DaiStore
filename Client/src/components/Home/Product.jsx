@@ -19,7 +19,7 @@ const Main = () => {
   }, []);
 
   return (
-    <div className='flex flex-wrap justify-between'>
+    <div className='flex flex-wrap shrink justify-evenly'>
       {products.map((product, index) => (
         <Card key={index} name={product.name} cost={product.cost} img={product.image}/>
       ))}

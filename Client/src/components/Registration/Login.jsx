@@ -1,17 +1,16 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
 
 const Login = () => {
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-8 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Login to PIXTEL
           </h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" action="#" method="POST">
             <div>
               <label
@@ -70,28 +69,28 @@ const Login = () => {
               </button>
             </div>
 
-            <p class="text-sm font-light text-gray-900 dark:text-gray-900">
+            <p className="text-sm font-light text-gray-900 dark:text-gray-900">
               Dont have an account yet?{" "}
               <a
                 href="/signup"
-                class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                className="font-medium text-primary-600 hover:underline dark:text-primary-500"
               >
                 Sign up
               </a>
             </p>
           </form>
 
-          <div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-            <p class="mx-4 mb-0 text-center font-semibold">OR</p>
+          <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+            <p className="mx-4 mb-0 text-center font-semibold">OR</p>
           </div>
 
-          <button class="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+          <button className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
             <img
               src="https://www.svgrepo.com/show/355037/google.svg"
-              class="w-6 h-6"
+              className="w-6 h-6"
               alt=""
             />
-            <span class="dark:text-gray-900">Login with Google</span>
+            <span className="dark:text-gray-900">Login with Google</span>
           </button>
         </div>
       </div>
