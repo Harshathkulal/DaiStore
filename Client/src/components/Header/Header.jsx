@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const [nav, setNav] = useState(false);
+
+  const cartCount = useSelector(state => state.cart.cartCount);
 
   return (
     <>
@@ -57,7 +60,7 @@ const Header = () => {
             </svg>
 
             <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-black w-5 h-5 rounded-full flex items-center justify-center text-white">
-              0
+            {cartCount}
             </span>
           </a>
         </div>

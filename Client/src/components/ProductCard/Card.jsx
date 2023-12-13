@@ -27,7 +27,7 @@ const Card = (props) => {
             {/*dark:text-white*/}
             </div>
             
-            <button class="button transition ease-in duration-200 hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
+            <button onClick={props.addToCart} className="button transition ease-in duration-200 hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
               <span className="p-4">ADD TO CART</span>
             </button>
            

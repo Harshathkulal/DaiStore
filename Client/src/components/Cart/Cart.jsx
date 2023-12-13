@@ -1,40 +1,15 @@
 import React from "react";
+import { useSelector,useDispatch } from 'react-redux';
+import { removeFromCart } from '../../redux/cartSlice'
 
 const CartItem = () => {
-  let products = [
-    {
-      id: 1,
-      imageSrc: "image-url",
-      imageAlt: "Apple",
-      href: "#",
-    },
-    {
-      id: 1,
-      imageSrc: "image-url",
-      imageAlt: "Appleaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      href: "#",
-    },
-    {
-      id: 1,
-      imageSrc: "image-url",
-      imageAlt: "Apple",
-      href: "#",
-    },
-    {
-      id: 1,
-      imageSrc: "image-url",
-      imageAlt: "Apple",
-      href: "#",
-    },
-    {
-      id: 1,
-      imageSrc: "image-url",
-      imageAlt: "Apple",
-      href: "#",
-    },
-    // Add other product details similarly
-  ];
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
+  console.log(cartItems)
 
+  const handleRemove = (cartItem) => {
+    dispatch(removeFromCart(cartItem));
+  };
   return (
     <>
       <h1 className="mt-6">Shopping Cart</h1>
@@ -42,26 +17,26 @@ const CartItem = () => {
         <div className="flex flex-col flex-auto">
           <div className="mt-4">
             <ul role="list" className="divide-y divide-gray-200 w-full">
-              {products.map((product) => (
-                <li key={product.id} className="flex gap-6 p-6">
+              {cartItems.map((cartItem,index) => (
+                <li key={index} className="flex gap-6 p-6">
                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                     <img
-                      src={product.imageSrc}
-                      alt={product.imageAlt}
+                      src={cartItem.img}
+                     
                       className="h-full w-full object-cover object-center"
                     />
                   </div>
                   <div className="ml-4 flex-1 flex flex-col justify-between">
                     <div className="flex justify-between items-center">
-                      <h3>
-                        <a href={product.href}>{product.imageAlt}</a>
+                      <h3>{cartItem.name}
                       </h3>
-                      <p className="ml-4">₹100</p>
+                      <p className="ml-4">{cartItem.cost}</p>
                     </div>
                     <div className="flex justify-between items-center text-sm text-gray-500">
                       <p>Qty 1</p>
                       <button
                         type="button"
+                        onClick={() => handleRemove(cartItem)}
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
                         Remove

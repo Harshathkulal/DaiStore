@@ -62,7 +62,7 @@ const Signup = () => {
               </div>
               <div className="mt-1">
                 <input
-                  id="password"
+                  id="confirmpassword"
                   name="password"
                   type="password"
                   placeholder=""
@@ -73,12 +73,12 @@ const Signup = () => {
               </div>
             </div>
 
-            <div class="flex items-start">
-                      <div class="flex items-center h-5">
-                        <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""/>
+            <div className="flex items-start">
+                      <div className="flex items-center h-5">
+                        <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""/>
                       </div>
-                      <div class="ml-3 text-sm">
-                        <label for="terms" class=" text-gray-900 dark:text-gray-900">I accept the <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
+                      <div className="ml-3 text-sm">
+                        <label htmlFor="terms" className=" text-gray-900 dark:text-gray-900">I accept the <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
                       </div>
                   </div>
 
@@ -91,28 +91,28 @@ const Signup = () => {
               </button>
             </div>
 
-            <p class="text-sm font-light text-gray-900 dark:text-gray-900">
+            <p className="text-sm font-light text-gray-900 dark:text-gray-900">
               Already have an account?{" "}
               <a
                 href="/login"
-                class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                className="font-medium text-primary-600 hover:underline dark:text-primary-500"
               >
                 Login Here
               </a>
             </p>
           </form>
 
-          <div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-            <p class="mx-4 mb-0 text-center font-semibold">OR</p>
+          <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+            <p className="mx-4 mb-0 text-center font-semibold">OR</p>
           </div>
 
-          <button class="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+          <button className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
             <img
               src="https://www.svgrepo.com/show/355037/google.svg"
-              class="w-6 h-6"
+              className="w-6 h-6"
               alt=""
             />
-            <span class="dark:text-gray-900">Login with Google</span>
+            <span className="dark:text-gray-900">Login with Google</span>
           </button>
         </div>
       </div>
