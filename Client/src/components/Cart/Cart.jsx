@@ -7,12 +7,27 @@ const CartItem = () => {
   const dispatch = useDispatch();
   console.log(cartItems)
 
+  const calculateSubtotal = () => {
+    return cartItems.reduce((total, cartItem) => total + cartItem.cost, 0);
+  };
+  const subtotal = calculateSubtotal();
+
+  const estimatedTax = () => {
+    return subtotal*0.18;
+  };
+  const estimatedtax=estimatedTax();
+
+  const OrderTotal = () => {
+    return subtotal+estimatedtax;
+  };
+  const ordertotal=OrderTotal();
+
   const handleRemove = (cartItem) => {
     dispatch(removeFromCart(cartItem));
   };
   return (
     <>
-      <h1 className="mt-6">Shopping Cart</h1>
+      <h1 className="flex justify-center text-lg font-bold mt-6">Shopping Cart</h1>
       <div className="m-6 flex flex-col md:flex-row gap-12  bg-white">
         <div className="flex flex-col flex-auto">
           <div className="mt-4">
@@ -56,15 +71,15 @@ const CartItem = () => {
             </h2>
             <div className="flex justify-between text-base font-medium text-gray-900 w-full mb-2">
               <p>Subtotal</p>
-              <p>₹262.00</p>
+              <p>₹{subtotal}</p>
             </div>
             <div className="flex justify-between text-base font-medium text-gray-900 w-full mb-2">
-              <p>Estimated Tax</p>
-              <p>₹12.00</p>
+              <p>Estimated Tax (18%)</p>
+            <p>₹{estimatedtax}</p>
             </div>
             <div className="flex justify-between text-lg font-semibold text-gray-900 w-full">
               <p>Order Total</p>
-              <p>₹274.00</p>
+              <p>₹{ordertotal}</p>
             </div>
 
             <p className="mt-1 text-sm text-gray-500 w-full">
