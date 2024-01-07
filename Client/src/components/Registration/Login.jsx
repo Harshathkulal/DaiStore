@@ -1,6 +1,46 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addUser, removeUser} from '../../redux/cartSlice'
+import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from "firebase/auth";
 
 const Login = () => {
+
+  const dispatch = useDispatch();
+  const auth = getAuth(); 
+  const provider = new GoogleAuthProvider();
+
+  const handleGoogleLogin=(e)=>{
+    e.preventDefault()
+    //console.log(auth)
+    signInWithPopup(auth,provider).then((result)=>{
+      const user = result.user;
+      dispatch(addUser({
+        _id:user.uid,
+        name:user.displayName,
+        email:user.email,
+        image:user.photoURL,
+      })
+      );
+      console.log(user)
+    })
+    .catch((error)=>{
+      console.log(error)
+      
+    });
+      
+  };
+
+   const handleSignOut=()=>{
+    signOut(auth)
+   .then(()=>{
+    console.log("logout successful")
+    dispatch(removeUser());
+   })
+    .catch((error)=>{
+      console.log(error)  
+    });
+  }
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-8 lg:px-8">
@@ -84,7 +124,7 @@ const Login = () => {
             <p className="mx-4 mb-0 text-center font-semibold">OR</p>
           </div>
 
-          <button className="w-full text-center py-3 mb-12 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+          <button onClick={handleGoogleLogin} className="w-full text-center py-3 mb-12 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
             <img
               src="https://www.svgrepo.com/show/355037/google.svg"
               className="w-6 h-6"
@@ -92,6 +132,7 @@ const Login = () => {
             />
             <span className="dark:text-gray-900">Login with Google</span>
           </button>
+          <button onClick={handleSignOut} >logout</button>
         </div>
       </div>
     </>

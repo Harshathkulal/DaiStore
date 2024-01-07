@@ -38,8 +38,16 @@ const cartSlice = createSlice({
       }
       return state;
     },
+
+    //======= User start here =====//
+    addUser:(state,action)=>{
+      state.userInfo = action.payload
+    },
+    removeUser:(state)=>{
+      state.userInfo = null
+    },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, addUser, removeUser} = cartSlice.actions;
 export default cartSlice.reducer;

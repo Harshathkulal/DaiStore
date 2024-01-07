@@ -4,6 +4,7 @@ import { removeFromCart } from '../../redux/cartSlice'
 
 const CartItem = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const userInfo = useSelector((state)=>state.cart.userInfo)
   const dispatch = useDispatch();
   console.log(cartItems)
 
@@ -25,6 +26,14 @@ const CartItem = () => {
   const handleRemove = (cartItem) => {
     dispatch(removeFromCart(cartItem));
   };
+
+  const handleCheckout=()=>{
+    if(userInfo){
+      console.log("Proceed to Payement");
+    }else
+    console.log("login to make payment")
+  }
+
   return (
     <>
       <h1 className="flex justify-center text-lg font-bold mt-6">Shopping Cart</h1>
@@ -86,7 +95,7 @@ const CartItem = () => {
               Shipping and taxes calculated at checkout.
             </p>
             <div className="mt-4 border-t border-gray-200 pt-4"></div>
-            <div className="mt-6">
+            <div onClick={handleCheckout} className="mt-6">
               <a
                 href="#"
                 className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
