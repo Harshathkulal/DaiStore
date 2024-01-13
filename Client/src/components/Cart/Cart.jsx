@@ -97,7 +97,7 @@ const CartItem = () => {
             <div className="mt-4 border-t border-gray-200 pt-4"></div>
             <div onClick={handleCheckout} className="mt-6">
               <a
-                href="#"
+                href="/checkout"
                 className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
               >
                 Checkout

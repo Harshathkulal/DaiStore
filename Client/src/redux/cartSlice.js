@@ -1,8 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// Load user info from local storage if available
+const loadUserInfoFromStorage = () => {
+  return (dispatch) => {
+    const storedUserInfo = localStorage.getItem('userInfo');
+    const userInfo = storedUserInfo ? JSON.parse(storedUserInfo) : null;
+
+    if (userInfo) {
+      dispatch(addUser(userInfo));
+    }
+  };
+};
+
 const initialState = {
   cartItems: [],
   cartCount: 0,
+  userInfo: loadUserInfoFromStorage(),
 };
 
 const cartSlice = createSlice({
@@ -40,14 +53,18 @@ const cartSlice = createSlice({
     },
 
     //======= User start here =====//
-    addUser:(state,action)=>{
-      state.userInfo = action.payload
+     // Update the addUser reducer to directly set userInfo without affecting local storage
+     addUser: (state, action) => {
+      state.userInfo = action.payload;
     },
+
     removeUser:(state)=>{
-      state.userInfo = null
+      state.userInfo = null;
+      localStorage.removeItem('userInfo');
     },
   },
 });
 
 export const { addToCart, removeFromCart, addUser, removeUser} = cartSlice.actions;
+export { loadUserInfoFromStorage }; // Export the loadUserInfoFromStorage function
 export default cartSlice.reducer;

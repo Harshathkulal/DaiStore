@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = (props) => {
   return (
-    <div className="bg-white p-4">
+    <div className="bg-white p-2 shadow m-4">
       <div className="flex flex-col">
         {/* dark:bg-gray-800 dark:border-gray-700*/}
 
@@ -11,6 +11,7 @@ const Card = (props) => {
             className="md:h-64 md:w-64 h-32 w-32 object-cover object-center group-hover:opacity-75"
             src={props.img}
             alt="product image"
+            loading="lazy"
           />
         </a>
 

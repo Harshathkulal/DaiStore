@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import cartSlice from './cartSlice';
+import cartSlice, { loadUserInfoFromStorage }  from './cartSlice';
 
 const persistedCartItems = localStorage.getItem('cartItems');
 const initialState = {
@@ -15,5 +15,6 @@ const store = configureStore({
   },
   preloadedState: initialState,
 });
+store.dispatch(loadUserInfoFromStorage());
 
 export default store;

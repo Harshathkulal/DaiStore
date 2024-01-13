@@ -26,11 +26,6 @@ const Header = () => {
         <ul className="hidden ml-auto lg:flex lg:gap-x-6 text-sm font-semibold leading-6 text-gray-900">
           <li>
             <a href="/" className="hover:underline me-4 md:me-6">
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="/product" className="hover:underline me-4 md:me-6">
               Product
             </a>
           </li>
@@ -80,11 +75,6 @@ const Header = () => {
               <ul className="flex flex-col p-4 text-gray-800">
                 <li className="py-2">
                   <a href="/" className="hover:underline">
-                    Home
-                  </a>
-                </li>
-                <li className="py-2">
-                  <a href="/product" className="hover:underline">
                     Product
                   </a>
                 </li>
