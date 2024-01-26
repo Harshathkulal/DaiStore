@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineMenu} from "react-icons/ai";
+import { MdOutlineLightMode, MdDarkMode } from "react-icons/md";
 import { useSelector } from 'react-redux';
+import logo from "../../assets/Pixtel.png";
 
-const Header = () => {
+const Header = ({ darkMode, toggleDarkMode }) => {
   const [nav, setNav] = useState(false);
+  
 
   const cartCount = useSelector(state => state.cart.cartCount);
+  console.log(cartCount)
+
+
 
   return (
-    <>
-      <nav className="flex items-center justify-between gap-6 p-4 lg:px-8">
+    <div className={`p-2 light:bg-white light:text-black dark:bg-slate-800 dark:text-white ${darkMode ? 'dark' : 'light'}`}>
+      <nav className="flex items-center justify-between gap-4 p-2">
         {/* Mobile Menu Button */}
         <div className="lg:hidden">
           <button onClick={() => setNav(!nav)}>
@@ -19,11 +25,11 @@ const Header = () => {
         {/* Your Company Logo */}
         <div>
           <a href="#" className="-m-1.5 p-1.5 ml-auto">
-            <span className="">Your Company</span>
+          <img src={logo} alt="Company Logo" className="h-10 w-10" />
           </a>
         </div>
         {/* Desktop Menu - Hidden on Mobile */}
-        <ul className="hidden ml-auto lg:flex lg:gap-x-6 text-sm font-semibold leading-6 text-gray-900">
+        <ul className="hidden ml-auto lg:flex lg:gap-x-6 text-sm font-semibold leading-6 text-gray-900 dark:text-white">
           <li>
             <a href="/" className="hover:underline me-4 md:me-6">
               Product
@@ -36,7 +42,10 @@ const Header = () => {
           </li>
         </ul>
        
-        <div>Dark</div>
+        <div onClick={toggleDarkMode} className="cursor-pointer">
+          {darkMode ? <MdOutlineLightMode size={24}/> : <MdDarkMode size={24}/>}
+        </div>
+
         <div>
           <a href="/cart" role="button" className="relative flex">
             <svg
@@ -64,7 +73,7 @@ const Header = () => {
       {/* Mobile Menu */}
       {nav && (
         <div className="fixed top-0 left-0 w-full h-full bg-black/80 z-20 lg:hidden">
-          <div className="fixed top-0 left-0 w-[70%] h-full bg-white z-30 shadow-lg">
+          <div className="fixed top-0 left-0 w-[70%] h-full bg-white z-30 shadow-lg dark:bg-slate-900 dark:text-white">
             <div className="flex justify-between items-center p-4">
               <h2 className="text-2xl">Pixtel</h2>
               <button onClick={() => setNav(!nav)}>
@@ -72,7 +81,7 @@ const Header = () => {
               </button>
             </div>
             <nav>
-              <ul className="flex flex-col p-4 text-gray-800">
+              <ul className="flex flex-col p-4 text-gray-800 dark:text-white">
                 <li className="py-2">
                   <a href="/" className="hover:underline">
                     Product
@@ -80,7 +89,7 @@ const Header = () => {
                 </li>
 
                 <li className="py-2">
-                  <a href="/login" className="hover:underline">
+                  <a href="/login" className="hover:underline dark:text-white">
                     Login
                   </a>
                 </li>
@@ -89,7 +98,7 @@ const Header = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

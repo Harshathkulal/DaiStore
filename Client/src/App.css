@@ -3,3 +3,25 @@
     width: 100%;
     /* Other button styles */
   }
+
+  .dark {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  /* Light mode styles */
+  .light {
+    background-color: #fff;
+    color: #333;
+  }
+
+  .rotate {
+    transform: rotateY(0deg);
+    transition: transform 0.5s ease-in-out; /* You can adjust the duration as needed */
+  }
+
+  .rotate-back  {
+      transform: rotateY(180deg);
+      transition: transform 0.5s ease-out; /* You can adjust the duration as needed */
+  
+  }

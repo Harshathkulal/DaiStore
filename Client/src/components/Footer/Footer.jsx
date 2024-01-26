@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Footer = () => {
+const Footer = ({darkMode}) => {
   return (
     
 
-<footer className="bg-white shadow dark:bg-gray-900 ">
+<footer className={`shadow dark:bg-slate-400 ${darkMode ? 'dark' : 'light'}`}>
     <div className=" w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
       <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" className="hover:underline">Pixtel™</a>. All Rights Reserved.
     </span>

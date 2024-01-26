@@ -13,22 +13,36 @@ const loadUserInfoFromStorage = () => {
 };
 
 const initialState = {
-  cartItems: [],
+  cartItems:[],
   cartCount: 0,
   userInfo: loadUserInfoFromStorage(),
 };
+
+// Calculate initial cartCount based on quantities of items
+initialState.cartCount = initialState.cartItems.reduce((count, item) => count + item.quantity,0);
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+
     addToCart: (state, action) => {
       const updatedCartItems = [...state.cartItems, action.payload];
       localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
       return {
         ...state,
         cartItems: updatedCartItems,
-        cartCount: state.cartCount + 1,
+        cartCount: updatedCartItems.reduce((count, item) => count + item.quantity, 0),
+      };
+    },
+
+    updateCart: (state, action) => {
+      const updatedCartItems = action.payload;
+      localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+      return {
+        ...state,
+        cartItems: updatedCartItems,
+        cartCount: updatedCartItems.reduce((count, item) => count + item.quantity, 0), // Update cartCount based on the length of updatedCartItems
       };
     },
     
@@ -46,11 +60,24 @@ const cartSlice = createSlice({
         return {
           ...state,
           cartItems: updatedCartItems,
-          cartCount: state.cartCount - 1,
+          cartCount: updatedCartItems.reduce((count, item) => count + item.quantity, 0), // Update cartCount based on the sum of quantities
         };
       }
       return state;
     },
+
+    decreaseCartItemQuantity: (state, action) => {
+      const { id } = action.payload;
+      const existingCartItem = state.cartItems.find((item) => item.id === id);
+
+      if (existingCartItem && existingCartItem.quantity > 1) {
+        existingCartItem.quantity -= 1;
+        localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
+        state.cartCount = state.cartItems.reduce((count, item) => count + item.quantity, 0);
+      }
+    },
+
+    
 
     //======= User start here =====//
      // Update the addUser reducer to directly set userInfo without affecting local storage
@@ -65,6 +92,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, addUser, removeUser} = cartSlice.actions;
+export const { addToCart, updateCart, removeFromCart, addUser, removeUser, decreaseCartItemQuantity} = cartSlice.actions;
 export { loadUserInfoFromStorage }; // Export the loadUserInfoFromStorage function
 export default cartSlice.reducer;
