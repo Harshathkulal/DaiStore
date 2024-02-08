@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart,decreaseCartItemQuantity } from "../../redux/cartSlice";
+import {
+  removeFromCart,
+  decreaseCartItemQuantity,
+} from "../../redux/cartSlice";
 
 const CartItem = ({ darkMode }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -10,7 +13,10 @@ const CartItem = ({ darkMode }) => {
   console.log(cartItems.quantity);
 
   const calculateSubtotal = () => {
-    return cartItems.reduce((total, cartItem) => total + cartItem.cost*cartItem.quantity, 0);
+    return cartItems.reduce(
+      (total, cartItem) => total + cartItem.cost * cartItem.quantity,
+      0
+    );
   };
   const subtotal = calculateSubtotal();
 
@@ -63,7 +69,8 @@ const CartItem = ({ darkMode }) => {
                       <p className="ml-4">{cartItem.cost}</p>
                     </div>
                     <div className="flex justify-between items-center text-sm">
-                    <p>Qty {cartItem.quantity || 0}</p> {/* Use default value 0 if quantity is undefined */}
+                      <p>Qty {cartItem.quantity || 0}</p>{" "}
+                      {/* Use default value 0 if quantity is undefined */}
                       <button
                         type="button"
                         onClick={() => handleRemove(cartItem)}

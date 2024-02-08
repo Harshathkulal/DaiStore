@@ -1,21 +1,22 @@
 import React, { useState } from "react";
-import { AiOutlineClose, AiOutlineMenu} from "react-icons/ai";
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { MdOutlineLightMode, MdDarkMode } from "react-icons/md";
-import { useSelector } from 'react-redux';
-import logo from "../../assets/Pixtel.png";
+import { useSelector } from "react-redux";
+import logo from "../../assets/PlantLogo.jpg";
 
 const Header = ({ darkMode, toggleDarkMode }) => {
   const [nav, setNav] = useState(false);
-  
 
-  const cartCount = useSelector(state => state.cart.cartCount);
-  console.log(cartCount)
-
-
+  const cartCount = useSelector((state) => state.cart.cartCount);
+  console.log(cartCount);
 
   return (
-    <div className={`p-2 light:bg-white light:text-black dark:bg-slate-800 dark:text-white ${darkMode ? 'dark' : 'light'}`}>
-      <nav className="flex items-center justify-between gap-4 p-2">
+    <div
+      className={`bg-slate-100 text-black dark:text-white ${
+        darkMode ? "dark" : "light"
+      }`}
+    >
+      <nav className="p-3 flex items-center justify-between gap-4  dark:bg-black dark:text-white">
         {/* Mobile Menu Button */}
         <div className="lg:hidden">
           <button onClick={() => setNav(!nav)}>
@@ -24,8 +25,12 @@ const Header = ({ darkMode, toggleDarkMode }) => {
         </div>
         {/* Your Company Logo */}
         <div>
-          <a href="#" className="-m-1.5 p-1.5 ml-auto">
-          <img src={logo} alt="Company Logo" className="h-10 w-10" />
+          <a href="/">
+            <img
+              src={logo}
+              alt="Company Logo"
+              className="mr-10 h-10 w-10 rounded-full"
+            />
           </a>
         </div>
         {/* Desktop Menu - Hidden on Mobile */}
@@ -41,9 +46,13 @@ const Header = ({ darkMode, toggleDarkMode }) => {
             </a>
           </li>
         </ul>
-       
-        <div onClick={toggleDarkMode} className="cursor-pointer">
-          {darkMode ? <MdOutlineLightMode size={24}/> : <MdDarkMode size={24}/>}
+
+        <div onClick={toggleDarkMode} className="ml-10 md:ml-0 cursor-pointer">
+          {darkMode ? (
+            <MdOutlineLightMode size={24} />
+          ) : (
+            <MdDarkMode size={24} />
+          )}
         </div>
 
         <div>
@@ -64,7 +73,7 @@ const Header = ({ darkMode, toggleDarkMode }) => {
             </svg>
 
             <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-black w-5 h-5 rounded-full flex items-center justify-center text-white">
-            {cartCount}
+              {cartCount}
             </span>
           </a>
         </div>
@@ -74,15 +83,23 @@ const Header = ({ darkMode, toggleDarkMode }) => {
       {nav && (
         <div className="fixed top-0 left-0 w-full h-full bg-black/80 z-20 lg:hidden">
           <div className="fixed top-0 left-0 w-[70%] h-full bg-white z-30 shadow-lg dark:bg-slate-900 dark:text-white">
-            <div className="flex justify-between items-center p-4">
-              <h2 className="text-2xl">Pixtel</h2>
+            <div className="flex justify-between items-center p-4 bg-slate-100 dark:bg-black">
+              <div>
+                <a href="/">
+                  <img
+                    src={logo}
+                    alt="Company Logo"
+                    className="h-10 w-10 rounded-full"
+                  />
+                </a>
+              </div>
               <button onClick={() => setNav(!nav)}>
                 <AiOutlineClose size={24} />
               </button>
             </div>
             <nav>
-              <ul className="flex flex-col p-4 text-gray-800 dark:text-white">
-                <li className="py-2">
+              <ul className=" flex flex-col p-4 text-gray-800 dark:text-white">
+                <li className=" py-2">
                   <a href="/" className="hover:underline">
                     Product
                   </a>

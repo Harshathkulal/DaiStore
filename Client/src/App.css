@@ -25,3 +25,7 @@
       transition: transform 0.5s ease-out; /* You can adjust the duration as needed */
   
   }
+
+  .text-xxs{
+    font-size: 8px;
+  }

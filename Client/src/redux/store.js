@@ -1,11 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import cartSlice, { loadUserInfoFromStorage }  from './cartSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import cartSlice, { loadUserInfoFromStorage } from "./cartSlice";
 
-const persistedCartItems = localStorage.getItem('cartItems');
+const persistedCartItems = localStorage.getItem("cartItems");
 const initialState = {
   cart: {
-  cartItems: persistedCartItems ? JSON.parse(persistedCartItems) : [],
-  cartCount: persistedCartItems ? JSON.parse(persistedCartItems).length : 0,
+    cartItems: persistedCartItems ? JSON.parse(persistedCartItems) : [],
+    cartCount: persistedCartItems ? JSON.parse(persistedCartItems).length : 0,
   },
 };
 

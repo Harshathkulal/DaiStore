@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { addUser, removeUser } from "../../redux/cartSlice";
 import {
   GoogleAuthProvider,
@@ -10,7 +10,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-const Login = ({darkMode}) => {
+const Login = ({ darkMode }) => {
   const dispatch = useDispatch();
   const auth = getAuth();
   const [email, setEmail] = useState("");
@@ -58,30 +58,36 @@ const Login = ({darkMode}) => {
     setEmailError(null); // Clear email-specific error
     setPasswordError(null); // Clear password-specific error
 
-
-
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        dispatch(addUser({
-          _id: user.uid,
-          name: user.displayName,
-          email: user.email,
-          image: user.photoURL,
-        }));
-        toast.success("Login successful")
+        dispatch(
+          addUser({
+            _id: user.uid,
+            name: user.displayName,
+            email: user.email,
+            image: user.photoURL,
+          })
+        );
+        toast.success("Login successful");
 
         console.log(user);
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage =  error.message;
+        const errorMessage = error.message;
 
-        if (errorCode === "auth/user-not-found" || errorCode === "auth/invalid-email") {
+        if (
+          errorCode === "auth/user-not-found" ||
+          errorCode === "auth/invalid-email"
+        ) {
           setEmailError("Email Address is wrong");
-        } else if (errorCode === "auth/wrong-password" || errorCode === "auth/missing-password") {
+        } else if (
+          errorCode === "auth/wrong-password" ||
+          errorCode === "auth/missing-password"
+        ) {
           setPasswordError("Password is wrong");
         } else {
           setError("Email or Password is Wrong");
@@ -93,7 +99,11 @@ const Login = ({darkMode}) => {
 
   return (
     <>
-      <div className={`flex min-h-full flex-1 flex-col justify-center px-8 lg:px-8 dark:bg-black dark:text-white ${darkMode ? 'dark' : 'light'}`}>
+      <div
+        className={`flex min-h-full flex-1 flex-col justify-center px-8 lg:px-8 dark:bg-black dark:text-white ${
+          darkMode ? "dark" : "light"
+        }`}
+      >
         <div className="sm:mx-auto sm:w-full sm:max-w-sm dark:text-white">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
             Login to PIXTEL
@@ -125,8 +135,8 @@ const Login = ({darkMode}) => {
             </div>
 
             {emailError && (
-        <div className="text-red-500 text-sm mt-2">{emailError}</div>
-      )}
+              <div className="text-red-500 text-sm mt-2">{emailError}</div>
+            )}
 
             <div>
               <div className="flex items-center justify-between">
@@ -151,16 +161,15 @@ const Login = ({darkMode}) => {
                 />
               </div>
 
-             {passwordError && (
-        <div className="text-red-500 text-sm mt-2">{passwordError}</div>
-      )}
+              {passwordError && (
+                <div className="text-red-500 text-sm mt-2">{passwordError}</div>
+              )}
 
-{error && (
-        <div className="text-red-500 text-sm mt-2">{error}</div>
-      )}
+              {error && (
+                <div className="text-red-500 text-sm mt-2">{error}</div>
+              )}
 
               <div className="text-sm flex flex-row-reverse p-1">
-            
                 <a
                   href="#"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
