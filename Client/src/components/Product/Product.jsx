@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import { db } from "../../Firebase/firbase";
 import { collection, getDocs } from "firebase/firestore";
 import Loader from "./Loading";
+import { RiWifiOffLine } from "react-icons/ri";
+import { BiRefresh } from "react-icons/bi";
 
 const Main = ({ darkMode }) => {
   const [products, setProducts] = useState([]);
@@ -44,7 +46,6 @@ const Main = ({ darkMode }) => {
         setProducts(fetchedProducts);
         setLoading(false); // Set loading to false when data is fetched
         clearTimeout(timeoutId); // Clear the timeout if data is loaded before 10 seconds
-        console.log(fetchedProducts);
       } catch (error) {
         console.error("Error fetching data:", error);
         setError(
@@ -83,7 +84,22 @@ const Main = ({ darkMode }) => {
   };
 
   if (error) {
-    return <div>Error hello: {error}</div>;
+    return (
+      <div
+        className={`flex flex-col items-center p-10 dark:bg-slate-400 ${
+          darkMode ? "dark" : "light"
+        }`}
+      >
+        <RiWifiOffLine size={56} />
+        <p className=" text p-10">{error}</p>
+        <p>Refresh</p>
+        <a href="/">
+          <button className="pb-64">
+            <BiRefresh size={24} />
+          </button>
+        </a>
+      </div>
+    );
   }
 
   return (

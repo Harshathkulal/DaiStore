@@ -1,14 +1,34 @@
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { MdOutlineLightMode, MdDarkMode } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import logo from "../../assets/PlantLogo.jpg";
+import { signOut, getAuth } from "firebase/auth";
+import { removeUser } from "../../redux/cartSlice";
+import { toast } from "react-toastify";
 
 const Header = ({ darkMode, toggleDarkMode }) => {
   const [nav, setNav] = useState(false);
 
   const cartCount = useSelector((state) => state.cart.cartCount);
-  console.log(cartCount);
+  const userInfo = useSelector((state) => state.cart.userInfo);
+  const dispatch = useDispatch();
+  const auth = getAuth();
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("logout successful");
+        dispatch(removeUser());
+        toast.success("Logout Successfull", {
+          autoClose: 200,
+          closeOnClick: true,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div
@@ -24,14 +44,17 @@ const Header = ({ darkMode, toggleDarkMode }) => {
           </button>
         </div>
         {/* Your Company Logo */}
-        <div>
+        <div className="flex">
           <a href="/">
             <img
               src={logo}
               alt="Company Logo"
-              className="mr-10 h-10 w-10 rounded-full"
+              className="h-10 w-10 rounded-full"
             />
           </a>
+          <p className="p-2 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-extrabold">
+            DaiStore
+          </p>
         </div>
         {/* Desktop Menu - Hidden on Mobile */}
         <ul className="hidden ml-auto lg:flex lg:gap-x-6 text-sm font-semibold leading-6 text-gray-900 dark:text-white">
@@ -40,11 +63,22 @@ const Header = ({ darkMode, toggleDarkMode }) => {
               Product
             </a>
           </li>
-          <li>
-            <a href="/login" className="hover:underline me-4 md:me-6">
-              Login
-            </a>
-          </li>
+          {userInfo ? (
+            <li>
+              <button
+                onClick={handleLogout}
+                className="hover:underline me-4 md:me-6"
+              >
+                Logout
+              </button>
+            </li>
+          ) : (
+            <li>
+              <a href="/login" className="hover:underline me-4 md:me-6">
+                Login
+              </a>
+            </li>
+          )}
         </ul>
 
         <div onClick={toggleDarkMode} className="ml-10 md:ml-0 cursor-pointer">
@@ -84,7 +118,7 @@ const Header = ({ darkMode, toggleDarkMode }) => {
         <div className="fixed top-0 left-0 w-full h-full bg-black/80 z-20 lg:hidden">
           <div className="fixed top-0 left-0 w-[70%] h-full bg-white z-30 shadow-lg dark:bg-slate-900 dark:text-white">
             <div className="flex justify-between items-center p-4 bg-slate-100 dark:bg-black">
-              <div>
+              <div className="flex">
                 <a href="/">
                   <img
                     src={logo}
@@ -92,24 +126,38 @@ const Header = ({ darkMode, toggleDarkMode }) => {
                     className="h-10 w-10 rounded-full"
                   />
                 </a>
+                <p className="p-2 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-extrabold">
+                  DaiStore
+                </p>
               </div>
               <button onClick={() => setNav(!nav)}>
                 <AiOutlineClose size={24} />
               </button>
             </div>
             <nav>
-              <ul className=" flex flex-col p-4 text-gray-800 dark:text-white">
+              <ul className=" flex flex-col p-4 text-gray-800 dark:text-white font-semibold">
                 <li className=" py-2">
                   <a href="/" className="hover:underline">
                     Product
                   </a>
                 </li>
 
-                <li className="py-2">
-                  <a href="/login" className="hover:underline dark:text-white">
-                    Login
-                  </a>
-                </li>
+                {userInfo ? (
+                  <li className="py-2">
+                    <button onClick={handleLogout} className="hover:underline">
+                      Logout
+                    </button>
+                  </li>
+                ) : (
+                  <li className="py-2">
+                    <a
+                      href="/login"
+                      className="hover:underline dark:text-white"
+                    >
+                      Login
+                    </a>
+                  </li>
+                )}
               </ul>
             </nav>
           </div>

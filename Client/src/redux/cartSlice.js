@@ -1,12 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Function to calculate cart count based on cart items
-const calculateCartCount = (cartItems) => {
-  return cartItems.reduce((count, item) => count + item.quantity, 0);
-};
-
 // Load user info from local storage if available
-const loadUserInfoFromStorage = () => {
+export const loadUserInfoFromStorage = () => {
   return (dispatch) => {
     const storedUserInfo = localStorage.getItem("userInfo");
     const userInfo = storedUserInfo ? JSON.parse(storedUserInfo) : null;
@@ -17,25 +12,13 @@ const loadUserInfoFromStorage = () => {
   };
 };
 
-// Get stored cart items from local storage
-const storedCartItems = JSON.parse(localStorage.getItem("cartItems"));
-
-// Calculate the initial cart count
-const initialCartCount = storedCartItems
-  ? calculateCartCount(storedCartItems)
-  : 0;
-
-const initialState = {
-  cartItems: [],
-  cartCount: initialCartCount,
-  userInfo: loadUserInfoFromStorage(),
-};
-console.log(initialState.cartCount);
-// If there are cart items in local storage, calculate the initial cartCount
-
 const cartSlice = createSlice({
   name: "cart",
-  initialState,
+  initialState: {
+    cartItems: [],
+    cartCount: 0,
+    userInfo: null,
+  },
   reducers: {
     addToCart: (state, action) => {
       const updatedCartItems = [...state.cartItems, action.payload];
@@ -103,9 +86,9 @@ const cartSlice = createSlice({
     },
 
     //======= User start here =====//
-    // Update the addUser reducer to directly set userInfo without affecting local storage
     addUser: (state, action) => {
       state.userInfo = action.payload;
+      localStorage.setItem("userInfo", JSON.stringify(action.payload));
     },
 
     removeUser: (state) => {
@@ -123,5 +106,4 @@ export const {
   removeUser,
   decreaseCartItemQuantity,
 } = cartSlice.actions;
-export { loadUserInfoFromStorage }; // Export the loadUserInfoFromStorage function
 export default cartSlice.reducer;

@@ -1,12 +1,11 @@
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { addUser, removeUser } from "../../redux/cartSlice";
+import { addUser } from "../../redux/cartSlice";
 import {
   GoogleAuthProvider,
   getAuth,
   signInWithPopup,
-  signOut,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
@@ -34,25 +33,25 @@ const Login = ({ darkMode }) => {
             image: user.photoURL,
           })
         );
-        console.log(user);
+        toast.success("Login Successful", {
+          autoClose: 200,
+          closeOnClick: true,
+        });
+
+        // Navigate after successful login
+        const referrer = document.referrer;
+        if (referrer.includes("/cart")) {
+          window.location.href = "/checkout";
+        } else {
+          window.location.href = "/";
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("logout successful");
-        dispatch(removeUser());
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleSignIn = (e) => {
+  const handleLoginIn = (e) => {
     e.preventDefault();
     setError(null); // Clear general error
     setEmailError(null); // Clear email-specific error
@@ -70,10 +69,20 @@ const Login = ({ darkMode }) => {
             image: user.photoURL,
           })
         );
-        toast.success("Login successful");
+        setEmail("");
+        setPassword("");
+        toast.success("Login Successful", {
+          autoClose: 200,
+          closeOnClick: true,
+        });
 
-        console.log(user);
-        // ...
+        // Navigate after successful login
+        const referrer = document.referrer;
+        if (referrer.includes("/cart")) {
+          window.location.href = "/checkout";
+        } else {
+          window.location.href = "/";
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -181,7 +190,7 @@ const Login = ({ darkMode }) => {
 
             <div>
               <button
-                onClick={handleSignIn}
+                onClick={handleLoginIn}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
@@ -206,7 +215,7 @@ const Login = ({ darkMode }) => {
 
           <button
             onClick={handleGoogleLogin}
-            className="w-full text-center py-3 mb-12 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150"
+            className="w-full text-center py-3 mb-20 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150"
           >
             <img
               src="https://www.svgrepo.com/show/355037/google.svg"
@@ -215,7 +224,6 @@ const Login = ({ darkMode }) => {
             />
             <span className="dark:text-white">Login with Google</span>
           </button>
-          <button onClick={handleSignOut}>Logout</button>
         </div>
       </div>
     </>

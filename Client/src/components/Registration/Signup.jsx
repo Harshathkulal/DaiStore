@@ -166,17 +166,8 @@ const Signup = ({ darkMode }) => {
           </form>
 
           <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-            <p className="mx-4 mb-0 text-center font-semibold">OR</p>
+            <p className="mx-4 mb-0 text-center font-semibold">***</p>
           </div>
-
-          <button className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
-            <img
-              src="https://www.svgrepo.com/show/355037/google.svg"
-              className="w-6 h-6"
-              alt="Google"
-            />
-            <span className="dark:text-white">Login with Google</span>
-          </button>
         </div>
       </div>
     </>
