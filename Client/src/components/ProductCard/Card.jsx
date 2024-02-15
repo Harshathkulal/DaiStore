@@ -17,9 +17,9 @@ const Card = (props) => {
           >
             <div className=" card-face ">
               {isRotated ? (
-                <div className="back flex items-center justify-center">
-                  <div className="md:w-72 md:h-72 w-32 h-32 bg-white group-hover:opacity-75 flex justify-center items-center">
-                    <p className="text-xxs md:text-sm lg:text-base xl:text-lg text-black font-semibold text-center">
+                <div className="back flex items-center justify-center ">
+                  <div className="md:w-72 md:h-72 w-32 h-32 bg-white group-hover:opacity-75 flex justify-center items-center dark:bg-black ">
+                    <p className="text-xxs md:text-sm lg:text-base xl:text-lg text-black font-semibold text-center dark:text-white">
                       {props.discription}
                     </p>
                   </div>
