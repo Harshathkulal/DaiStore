@@ -16,6 +16,7 @@ function App() {
   // Load dark mode setting from local storage on component mount
   const initialDarkMode = localStorage.getItem("darkMode") === "true";
   const [darkMode, setDarkMode] = useState(initialDarkMode);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Update local storage when darkMode changes
   useEffect(() => {
@@ -26,14 +27,13 @@ function App() {
     setDarkMode(!darkMode);
   };
   return (
-    <>
       <BrowserRouter>
-        <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
         <Routes>
           <Route
             path="/"
             element={
-              <Main darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+              <Main darkMode={darkMode} toggleDarkMode={toggleDarkMode} searchQuery={searchQuery}/>
             }
           ></Route>
           <Route path="/login" element={<Login darkMode={darkMode} />}></Route>
@@ -55,7 +55,6 @@ function App() {
         <Footer darkMode={darkMode} />
         <ToastContainer />
       </BrowserRouter>
-    </>
   );
 }
 

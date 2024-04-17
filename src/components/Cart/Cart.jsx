@@ -48,7 +48,7 @@ const CartItem = ({ darkMode }) => {
   };
 
   return (
-    <div className={`dark:bg-black  ${darkMode ? "dark" : "light"}`}>
+    <div className={`dark:bg-black pb-6 ${darkMode ? "dark" : "light"}`}>
       <h1 className="flex justify-center text-lg font-bold dark:bg-[#333] dark:text-white">
         Shopping Cart
       </h1>

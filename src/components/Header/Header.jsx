@@ -6,14 +6,17 @@ import logo from "../../assets/PlantLogo.jpg";
 import { signOut, getAuth } from "firebase/auth";
 import { removeUser } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
+import { CiSearch } from "react-icons/ci";
 
-const Header = ({ darkMode, toggleDarkMode }) => {
+const Header = ({ darkMode, toggleDarkMode, searchQuery,setSearchQuery }) => {
   const [nav, setNav] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const cartCount = useSelector((state) => state.cart.cartCount);
   const userInfo = useSelector((state) => state.cart.userInfo);
   const dispatch = useDispatch();
   const auth = getAuth();
+  
 
   const handleLogout = () => {
     signOut(auth)
@@ -32,7 +35,7 @@ const Header = ({ darkMode, toggleDarkMode }) => {
 
   return (
     <div
-      className={`bg-slate-100 text-black dark:text-white ${
+      className={`bg-slate-100 text-black dark:text-white sticky top-0 z-10 ${
         darkMode ? "dark" : "light"
       }`}
     >
@@ -49,15 +52,30 @@ const Header = ({ darkMode, toggleDarkMode }) => {
             <img
               src={logo}
               alt="Company Logo"
-              className="h-10 w-10 rounded-full"
+              className="h-7 w-7 rounded-full"
             />
           </a>
-          <p className="p-2 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-extrabold">
+          <p className="hidden lg:block p-1 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-extrabold">
             DaiStore
           </p>
         </div>
+
+        <div className={`ml-auto flex items-center bg-white rounded-lg ${isFocused ? 'border border-blue-500' : ''}`}>
+        <CiSearch size={24} className="text-black"/>
+        <input
+          type="text"
+          placeholder="Search..."
+          className="text-black rounded-lg p-1 focus:outline-none"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+        />
+
+      </div>
         {/* Desktop Menu - Hidden on Mobile */}
-        <ul className="hidden ml-auto lg:flex lg:gap-x-6 text-sm font-semibold leading-6 text-gray-900 dark:text-white">
+         
+        <ul className="hidden  lg:flex lg:gap-x-6 text-sm font-semibold leading-6 text-gray-900 dark:text-white">
           <li>
             <a href="/" className="hover:underline me-4 md:me-6">
               Product
@@ -81,7 +99,7 @@ const Header = ({ darkMode, toggleDarkMode }) => {
           )}
         </ul>
 
-        <div onClick={toggleDarkMode} className="ml-10 md:ml-0 cursor-pointer">
+        <div onClick={toggleDarkMode} className="ml-10 md:ml-0 cursor-pointer hidden lg:block">
           {darkMode ? (
             <MdOutlineLightMode size={24} />
           ) : (
@@ -113,7 +131,7 @@ const Header = ({ darkMode, toggleDarkMode }) => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile sidebar Menu */}
       {nav && (
         <div className="fixed top-0 left-0 w-full h-full bg-black/80 z-20 lg:hidden">
           <div className="fixed top-0 left-0 w-[70%] h-full bg-white z-30 shadow-lg dark:bg-slate-900 dark:text-white">
@@ -158,6 +176,15 @@ const Header = ({ darkMode, toggleDarkMode }) => {
                     </a>
                   </li>
                 )}
+                <li className="py-2">
+                <div onClick={toggleDarkMode} className=" cursor-pointer">
+          {darkMode ? (
+            <MdOutlineLightMode size={24} />
+          ) : (
+            <MdDarkMode size={24} />
+          )}
+        </div>
+                </li>
               </ul>
             </nav>
           </div>
