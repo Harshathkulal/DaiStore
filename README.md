@@ -1,8 +1,13 @@
-# React + Vite
+DaiStore: Ecommerce Website for Plants
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Features:
+Tech stack: React + Tailwind + Firebase(backend)
+Authentication && Authorization with JWT
+Real-time messaging with Socket.io
+Online user status (Socket.io and React Context)
+Global state management with Zustand
+Error handling both on the server and on the client
+Deplyoment in Render
+And much more!
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![daistore](https://github.com/Harshathkulal/DaiStore/assets/130536991/8a2b8143-ccc9-42df-8122-9b8ca9fa0fd9)
